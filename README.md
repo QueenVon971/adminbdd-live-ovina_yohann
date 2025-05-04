@@ -232,5 +232,6 @@ La manière la plus simple de tester cette API est d'utiliser:
 **Projet développé dans le cadre d'un cours sur MongoDB et les API RESTful.
 
 
-#   a d m i n b d d - l i v e - o v i n a _ y o h a n n  
+#   a d m i n b d d - l i v e - o v i n a _ y o h a n n 
+ 
  
