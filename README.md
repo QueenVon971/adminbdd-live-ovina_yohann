@@ -13,7 +13,6 @@ Ce projet est une API RESTful développée avec Next.js et MongoDB pour gérer u
 
 ### Commentaires
 - `GET http://localhost:3000/api/comments` - Liste des commentaires
-- `GET http://localhost:3000/api/comments?movie_id=573a1390f29313caabcd4135` - Commentaires filtrés par film
 - `GET http://localhost:3000/api/comments/5a9427648b0beebeb69579cc` - Détails d'un commentaire
 - `POST http://localhost:3000/api/comments` - Création d'un commentaire
 - `PUT http://localhost:3000/api/comments/5a9427648b0beebeb69579cc` - Mise à jour d'un commentaire
@@ -40,11 +39,6 @@ Cette API offre une interface complète pour gérer :
 
 La documentation complète de l'API est disponible via Swagger, offrant une interface interactive pour tester tous les endpoints.
 
-## 🔗 Liens importants
-
-- **GitHub Repository** : [https://github.com/CYSTCloud/vii](https://github.com/CYSTCloud/vii)
-- **Documentation Swagger** : [http://localhost:3000/api-docs](http://localhost:3000/api-docs) *(fonctionne uniquement si le serveur est lancé en local)*
-
 ## 💻 Technologies utilisées
 
 - **Next.js 14** : Framework React pour le développement d'applications web avec les App Router
@@ -58,7 +52,6 @@ La documentation complète de l'API est disponible via Swagger, offrant une inte
 
 | Méthode | Endpoint | Description |
 |--------:|:---------|:------------|
-| GET     | `/api/movies` | Récupérer une liste de films avec pagination et filtres |
 | GET     | `/api/movies/{idMovie}` | Récupérer un film par son ID |
 | POST    | `/api/movies` | Créer un nouveau film |
 | PUT     | `/api/movies/{idMovie}` | Mettre à jour un film existant |
@@ -68,7 +61,6 @@ La documentation complète de l'API est disponible via Swagger, offrant une inte
 
 | Méthode | Endpoint | Description |
 |--------:|:---------|:------------|
-| GET     | `/api/comments` | Récupérer tous les commentaires (avec option de filtrage par movie_id) |
 | GET     | `/api/comments/{idComment}` | Récupérer un commentaire spécifique |
 | POST    | `/api/comments` | Créer un nouveau commentaire |
 | PUT     | `/api/comments/{idComment}` | Mettre à jour un commentaire |
@@ -83,7 +75,6 @@ La documentation complète de l'API est disponible via Swagger, offrant une inte
 
 | Méthode | Endpoint | Description |
 |--------:|:---------|:------------|
-| GET     | `/api/theaters` | Récupérer une liste de théâtres avec pagination |
 | GET     | `/api/theaters/{idTheater}` | Récupérer un théâtre par son ID |
 | POST    | `/api/theaters` | Créer un nouveau théâtre |
 | PUT     | `/api/theaters/{idTheater}` | Mettre à jour un théâtre existant |
@@ -99,7 +90,120 @@ La documentation complète de l'API est disponible via Swagger, offrant une inte
 ### Étapes d'installation
 
 1. **Cloner le dépôt**
+   ```bash
+   git clone ...
+   cd adminbdd-live-code-espi-b3
+   ```
+   
+2. **Installer les dépendances**
+   ```bash
+   npm install
+   # ou
+   yarn install
+   ```
+   
+3. **Lancer le serveur de développement**
+   ```bash
+   npm run dev
+   # ou
+   yarn dev
+   ```
 
-```bash
-git clone https://github.com/CYSTCloud/vii.git
-cd adminbdd-live-code-espi-b3
+4. **Accéder à l'API**
+   - L'API est accessible sur [http://localhost:3000](http://localhost:3000)
+   - Documentation Swagger : [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
+
+## 📝 Exemples d'utilisation
+
+### Créer un nouveau film
+
+```http
+POST http://localhost:3000/api/movies
+Content-Type: application/json
+
+{
+  "title": "Nouveau Film Test",
+  "year": 2023,
+  "rated": "PG-13",
+  "runtime": 120,
+  "countries": ["France"],
+  "genres": ["Action", "Drama"],
+  "director": "Réalisateur Test",
+  "cast": ["Acteur 1", "Actrice 2"],
+  "plot": "Un film de test pour l'API"
+}
+```
+
+### Créer un nouveau commentaire
+
+```http
+POST http://localhost:3000/api/comments
+Content-Type: application/json
+
+{
+  "name": "Utilisateur Test",
+  "email": "utilisateur@test.com",
+  "text": "Ceci est un commentaire de test",
+  "movie_id": "573a1390f29313caabcd4135"
+}
+```
+
+### Créer un nouveau théâtre
+
+```http
+POST http://localhost:3000/api/theaters
+Content-Type: application/json
+
+{
+  "name": "Cinéma Test",
+  "address": {
+    "street1": "123 Avenue des Films",
+    "city": "Paris",
+    "state": "IDF",
+    "zipcode": "75001"
+  }
+}
+```
+
+## ⚛️ Architecture du projet
+
+```
+/
+├── app/                     # Code de l'application Next.js
+│   ├── api/                 # Endpoints API
+│   │   ├── movies/           # API Films
+│   │   │   ├── [idMovie]/      # Routes paramétrées par ID
+│   │   ├── comments/         # API Commentaires
+│   │   │   ├── [idComment]/    # Opérations sur un commentaire spécifique
+│   │   ├── theaters/         # API Théâtres
+│   │       ├── [idTheater]/    # Théâtre spécifique
+│   ├── api-docs/            # Documentation Swagger
+├── lib/                     # Utilitaires et connexions DB
+│   ├── mongodb-theaters.ts   # Connexion MongoDB pour théâtres
+│   ├── mongodb.ts           # Connexion MongoDB générique
+│   ├── swagger.ts           # Configuration Swagger
+├── package.json             # Dépendances et scripts
+```
+
+## 💬 Note sur la connexion MongoDB
+
+Ce projet utilise une connexion MongoDB codée en dur dans le fichier `lib/mongodb-theaters.ts` avec les identifiants suivants :
+
+```
+ovina:Formation2024@admindonnees.oj3fqbt.mongodb.net/sample_mflix
+```
+
+Cette approche a été choisie pour résoudre des problèmes d'authentification rencontrés avec les variables d'environnement.
+
+---
+
+## 📈 À propos des tests
+
+La manière la plus simple de tester cette API est d'utiliser:
+
+1. L'interface Swagger accessible à [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
+2. Postman ou un autre client API REST en utilisant les exemples fournis
+
+---
+
+**Projet développé Ovina et Yohann
