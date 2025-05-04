@@ -5,7 +5,7 @@ Ce projet est une API RESTful développée avec Next.js et MongoDB pour gérer u
 ## 🔔 Routes à tester
 
 ### Films
-- `GET http://localhost:3000/api/movies` - Liste des films avec pagination
+- `GET http://localhost:3000/api/movies` - Liste des films
 - `GET http://localhost:3000/api/movies/573a1390f29313caabcd4135` - Détails d'un film
 - `POST http://localhost:3000/api/movies` - Création d'un film
 - `PUT http://localhost:3000/api/movies/573a1390f29313caabcd4135` - Mise à jour d'un film
