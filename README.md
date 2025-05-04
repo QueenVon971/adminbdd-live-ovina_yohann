@@ -91,7 +91,7 @@ La documentation complète de l'API est disponible via Swagger, offrant une inte
 
 1. **Cloner le dépôt**
    ```bash
-   git clone ...
+   git clone https://github.com/QueenVon971/adminbdd-live-ovina_yohann.git
    cd adminbdd-live-code-espi-b3
    ```
    
